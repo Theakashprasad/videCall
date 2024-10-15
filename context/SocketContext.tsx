@@ -82,7 +82,7 @@ export const SocketContextProvider = ({
       setIsCallEnded(false);
 
       if (!currentSocketUser || !socket) return;
-      const stream = await getMediaStreams();
+      const stream = await getMediaStreams("user");
       if (!stream) {
         console.log("no stream in handleCall");
 
@@ -211,7 +211,7 @@ export const SocketContextProvider = ({
           return prev;
         }
       });
-      const stream = await getMediaStreams();
+      const stream = await getMediaStreams("user");
       if (!stream) {
         console.log("could not stream");
         handleHangup({
