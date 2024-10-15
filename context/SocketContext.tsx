@@ -1,7 +1,7 @@
 import { OngoingCall, Participants, PeerData, SocketUser } from "@/types";
 import { useUser } from "@clerk/nextjs";
 import Peer, { SignalData } from "simple-peer";
-
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import {
   createContext,
   useCallback,
@@ -34,7 +34,10 @@ export const SocketContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { user } = useUser();
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [socket, setSocket] = useState<Socket<
+    DefaultEventsMap,
+    DefaultEventsMap
+  > | null>(null);
   const [isSocketConnected, setSocketConnected] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState<SocketUser[] | null>(null);
   const [ongoingCall, setOnGoingCall] = useState<OngoingCall | null>(null);
